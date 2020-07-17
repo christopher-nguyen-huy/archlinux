@@ -1,0 +1,35 @@
+# Basics
+linux
+linux-zen
+base
+base-devel
+nano
+dhcpcd # dhcp service
+ntp # ntp service
+
+# Desktops
+# Openbox
+
+
+# i3/i3-gaps
+
+
+# Fonts
+# Runners
+dmenu
+gmrun
+
+# Wifi
+iwd
+netctl wpa_supplicant dialog
+
+# Laptop
+
+# Nvidia
+nvidia
+cuda
+
+# Intel
+intel-ucode
+# AMD
+amd-ucode
