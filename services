@@ -1,0 +1,8 @@
+dhcpcd.service
+iwd.service
+ntp.service
+docker.service
+redis.service
+mariadb.service
+sshd.service
+bluetooth.service
