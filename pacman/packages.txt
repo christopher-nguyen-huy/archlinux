@@ -1,0 +1,203 @@
+# Basics
+linux
+linux-zen
+base
+pacman-contrib (for rankmirror)
+
+# Hardware
+pulseaudio
+alsamixer
+alsa-utils
+exfat-utils
+ntfs-3g
+ntfsprogs # another comment
+usb-utils
+usbutils
+
+nano
+git
+calc
+bc
+scrot
+tree
+mlocate
+wget
+curl
+emacs
+vim
+vi
+xclip
+unrar
+p7zip
+zip
+unizp
+ffmpeg
+htop
+dos2unix
+logrotate
+screenfetch
+neofetch
+zsh
+
+thunar
+ffmpegthumbnailer
+tumbler
+firefox
+firefox-developer-edition
+xed
+gedit
+code
+atom
+viewnior
+feh
+mpv
+lmms
+xpdf
+zeal
+openscad
+
+# Terminals
+xterm
+kitty
+rxvt-unicode
+urxvt-perls
+urxvt-resize-font (aur)
+
+# Cli programs
+mpsyt
+streamlink
+livestreamer
+metasploit
+docker
+rtorrent
+mpc
+mpd
+
+# Services
+dhcpcd
+ntp
+openssh
+redis
+mariadb
+
+xorg-server
+xorg-xrdb
+xorg-xinit
+lightdm
+lightdm-gtk-greeter
+lightdm-gtk-greeter-settings
+
+# Window manager
+awesome
+# i3
+i3-wm
+i3-gaps (incompatible with i3-wm)
+i3lock
+i3status
+# Openbox
+openbox
+openbox-themes (aur)
+obconf
+obmenu
+lxappearance-obconf
+
+# Launchers
+gmrun
+# gtk-engine-murrine (aur, for gmrun)
+dmenu
+rofi
+albert
+
+# Taskbars
+tint2
+
+# Fonts
+noto-fonts (no tofu)
+noto-fonts-cjk
+noto-fonts-emoji
+ttf-dejavu
+ttf-liberation (ms replacement)
+ttf-opensans
+ttf-ubuntu-font-family (ubuntu)
+
+# Icons
+adwaita-icon-theme
+arc-gtk-theme
+arc-icon-theme
+
+# Wifi
+iwd
+# Deprecated
+# netctl
+# wpa_supplicant
+# dialog
+
+# Chips
+mesa
+# Intel
+intel-ucode
+xf86-video-intel
+vulkan-intel
+intel-compute-runtime
+# AMD
+amd-ucode
+amd-vlk
+opencl-mesa
+# Nvidia
+nvidia
+nvidia-settings
+nvidia-utils
+cuda
+cudnn
+opencl-nvidia
+
+# Networking
+nmap
+ethtool
+bind-tools (aka dnsutils)
+traceroute
+gnu-netcat
+iputils
+iperf
+inetutils
+
+# Programming Languages
+python
+python-pip
+rustup
+sbcl
+clisp
+go
+go-tools
+nasm
+clisp
+base-devel
+#	gcc
+#	gcc-libs
+#	cmake
+#	m4
+#	bison
+
+stress
+tlp (tlp-stat)
+smartmontools (hdd smart)
+lm_sensors
+dmidecode (mobo info)
+
+mdadm (raid)
+amp (rust text editor)
+tk (for matplotlib)
+xflux
+xflux-gui-git
+
+lolcat (pipe to rainbow, requires ruby)
+# figlet (ascii art)
+# toilet (ascii art)
+
+bat (cat alternative)
+ripgrep (grep alternative)
+
+# bluetooth
+bluez-utils
+pulseaudio-bluetooth
+pavucontrol

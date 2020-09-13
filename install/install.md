@@ -40,10 +40,14 @@ Format disk with `cfdisk`
 ### Not EFI
 
 ## Mounting
+```bash
+pacstrap /mnt base base-devel linux-firmware linux-zen lvm2 efibootmgr nano dhcpcd wget
+genfstab -U /mnt >> /mnt/etc/fstab
+```
 
 ## Installing
-```
-pacstrap /mnt base base-devel linux-firmware linux-zen lvm2 efibootmgr grub nano dhcpcd ntp wget 
+```bash
+pacstrap /mnt base linux-zen linux-firmware grub nano dhcpcd ntp lvm2 efibootmgr wget
 genfstab -U /mnt >> /mnt/etc/fstab
 arch-chroot /mnt
 ln -sf /usr/share/zoneinfo/Americas/New_York /etc/localtime
@@ -56,19 +60,8 @@ nano /etc/hosts
 passwd # change password
 ```
 
-## CPU Microcode
-```
-pacman -S amd-ucode
-pacman -S intel-ucode
-```
-
-## Kernel
-```
-mkinitcpio -P linux-zen
-```
-
 ## Create user
-```
+```bash
 useradd -m -g users -G chris
 passwd chris
 visudo
@@ -76,6 +69,32 @@ visudo
 ```
 root ALL=(ALL) ALL
 chris ALL=(ALL) ALL
+```
+
+## Crypto Keyfile
+```bash
+dd if=/dev/urandom of=/crypto_keyfile.bin bs=512 count=10
+chmod 000 /crypto_keyfile.bin
+exit # exit chroot
+cryptsetup luksAddKey /dev/nvme0n1p2 /mnt/crypto_keyfile.bin
+arch-chroot /mnt # re-enter chroot
+```
+
+## CPU Microcode
+```bash
+pacman -S amd-ucode
+pacman -S intel-ucode
+```
+
+## Kernel
+```bash
+mkinitcpio -P linux-zen
+```
+
+## Grub
+```bash
+grub-mkconfig -o /boot/grub/grub.cfg
+grub-install --target=x86_64-efi --efi-directory=/efi
 ```
 
 ## Enable dhcp
@@ -88,4 +107,19 @@ systemctl start dhcpcd.service
 ```
 systemctl enable ntpd.service
 systemctl start ntpd.service
+```
+
+## Setup root home folder
+### Bash shell
+- To know if you're root
+### Default dotfiles
+- For comfort when sudoing
+```bash
+cp /etc/skel/nano
+```
+
+## Exit reboot
+```bash
+exit
+reboot
 ```
