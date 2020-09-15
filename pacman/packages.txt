@@ -2,7 +2,11 @@
 linux
 linux-zen
 base
+
+# Pacman stuff
 pacman-contrib (for rankmirror)
+expac (extract pacman DB, package sizes)
+pacgraph (same sa above)
 
 # Hardware
 pulseaudio
