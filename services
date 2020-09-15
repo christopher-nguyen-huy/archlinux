@@ -6,3 +6,4 @@ redis.service
 mariadb.service
 sshd.service
 bluetooth.service
+docker.service
