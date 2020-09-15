@@ -154,7 +154,7 @@ opencl-nvidia
 # Networking
 nmap
 ethtool
-bind-tools (aka dnsutils)
+bind (aka dnsutils)
 traceroute
 gnu-netcat
 iputils
