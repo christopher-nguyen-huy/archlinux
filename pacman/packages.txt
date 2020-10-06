@@ -44,8 +44,11 @@ neofetch
 zsh
 
 thunar
-ffmpegthumbnailer
-tumbler
+thunar-archive-plugin
+xarchiver # thunar unzip plugin
+tumbler # thumbnails
+ffmpegthumbnailer # video thumbnails
+raw-thumbnailer # raw image thumbnails
 firefox
 firefox-developer-edition
 xed
