@@ -32,24 +32,49 @@ Otherwise internet doesn't work [Reference](https://www.tecmint.com/set-time-tim
 # timedatectl set-ntp true
 ```
 
-## Formating
+## Partitioning
 Format disk with `cfdisk`
 - `mbr` for bios, `gpt` for the complicated stuff
 ### EFI
-
+- 500mb efi
+- 100% linux luks
 ### Not EFI
+....
+
+## Cryptsetup + LVM
+Do I do this before or after formatting?
+```bash
+# https://wiki.archlinux.org/index.php/Dm-crypt/Encrypting_an_entire_system#Encrypted_boot_partition_(GRUB)
+cryptsetup luksFormat --type luks1 -s 512 -h sha512 /dev/nvme0n1p2
+cryptsetup open /dev/nvme0n1p2 lvm
+pvcreate /dev/mapper/lvm
+vgcreate vg /dev/mapper/lvm
+lvcreate -n root -l 100%FREE vg
+```
+
+## Formatting
+### EFI
+```
+mkfs.fat -F32 /dev/nvme0n1p1
+mkfs.ext4 /dev/dev/vg/root
+```
 
 ## Mounting
 ```bash
-pacstrap /mnt base base-devel linux-firmware linux-zen lvm2 efibootmgr nano dhcpcd wget
+mount /dev/vg/root /mnt
+mkdir -p /mnt/boot/efi
+mount /dev/nvme0n1p1 /mnt/boot/efi
+```
+
+## Pacstrapping
+```bash
+pacstrap /mnt base base-devel linux-zen linux-firmware grub nano dhcpcd ntp lvm2 efibootmgr wget
 genfstab -U /mnt >> /mnt/etc/fstab
+arch-chroot /mnt
 ```
 
 ## Installing
 ```bash
-pacstrap /mnt base linux-zen linux-firmware grub nano dhcpcd ntp lvm2 efibootmgr wget
-genfstab -U /mnt >> /mnt/etc/fstab
-arch-chroot /mnt
 ln -sf /usr/share/zoneinfo/Americas/New_York /etc/localtime
 hwclock --systohc
 nano /etc/locale.gen # Uncomment en_US.utf-8 and en_US.thenumbers
@@ -57,6 +82,9 @@ locale-gen
 echo "LANG=en_US.UTF-8" >> /etc/locale.conf
 echo "<hostname>" >> /etc/hostname
 nano /etc/hosts
+127.0.0.1		<hostname>
+::1				localhost
+127.0.0.1		<hostname>.localdomain localdomain
 passwd # change password
 ```
 
@@ -87,11 +115,22 @@ pacman -S intel-ucode
 ```
 
 ## Kernel
+`nano /etc/mkinitcpio.conf`
+```
+add (encrypt lvm2) before filesystems in hooks
+FILES=(/crypto_keyfile.bin)
+```
 ```bash
 mkinitcpio -P linux-zen
 ```
 
 ## Grub
+`nano /etc/default/grub`
+```
+GRUB_CMDLINE_LINUX="quiet cryptdevice=/dev/nvme0n1p2:lvm root=/dev/vg/root cryptkey=rootfs:/crypto_keyfile.bin"
+GRUB_ENABLE_CRYPTODISK=y
+```
+
 ```bash
 grub-mkconfig -o /boot/grub/grub.cfg
 grub-install --target=x86_64-efi --efi-directory=/efi
@@ -109,6 +148,13 @@ systemctl enable ntpd.service
 systemctl start ntpd.service
 ```
 
+# enable wifi (OLD)
+```
+pacman -S netctl wpa_supplicant dialog
+ip link set wlp3s0 down
+wifi-menu
+```
+
 ## Setup root home folder
 ### Bash shell
 - To know if you're root
@@ -121,5 +167,6 @@ cp /etc/skel/nano
 ## Exit reboot
 ```bash
 exit
+umount -R /mnt
 reboot
 ```

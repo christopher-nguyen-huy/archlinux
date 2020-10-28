@@ -62,6 +62,7 @@ lmms
 xpdf
 zeal
 openscad
+filezilla
 
 # Terminals
 xterm
