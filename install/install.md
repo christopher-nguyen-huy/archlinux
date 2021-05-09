@@ -24,6 +24,7 @@ Run the following command, replacing `/dev/sdx` with your drive, e.g. `/dev/sdb`
 
 ## Sync clock
 Otherwise internet doesn't work [Reference](https://www.tecmint.com/set-time-timezone-and-synchronize-time-using-timedatectl-command/)
+[serverfault answer](https://serverfault.com/a/972336)
 ```
 # timedatectl set-ntp true
 # timedatectl status # check to see if it works
@@ -90,7 +91,7 @@ passwd # change password
 
 ## Create user
 ```bash
-useradd -m -g users -G chris
+useradd -m -g users -G wheel chris
 passwd chris
 visudo
 ```
@@ -112,6 +113,26 @@ arch-chroot /mnt # re-enter chroot
 ```bash
 pacman -S amd-ucode
 pacman -S intel-ucode
+```
+
+## Missing kernel drivers
+Often, the default kernel will complain that it is missing modules. Probably a long running bug
+- aic94xx
+- wd719x
+- xhci_pci
+
+Install the drivers from aur to silence the warning, as not root user
+```
+git clone https://aur.archlinux.org/upd72020x-fw.git
+git clone https://aur.archlinux.org/wd719x-firmware.git
+git clone https://aur.archlinux.org/aic94xx-firmware.git
+
+cd upd72020x-fw
+makepkg -sri
+cd ../wd719x-firmware
+makepkg -sri
+cd ../aic94xx-firmware
+makepkg -sri
 ```
 
 ## Kernel
@@ -137,6 +158,11 @@ grub-install --target=x86_64-efi --efi-directory=/efi
 ```
 
 ## Enable dhcp
+`nano /etc/dhcpcd.conf`
+```
+hostname # uncomment to get dns working
+noarp # enable on home networks, disables arp probing
+```
 ```
 systemctl enable dhcpcd.service
 systemctl start dhcpcd.service

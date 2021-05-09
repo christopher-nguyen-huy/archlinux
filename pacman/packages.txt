@@ -1,12 +1,18 @@
 # Basics
 linux
 linux-zen
+linux-lts
+linux-headers
+linux-zen-headers
+linux-lts-headers
 base
 
 # Pacman stuff
 pacman-contrib (for rankmirror)
 expac (extract pacman DB, package sizes)
 pacgraph (same as above)
+archlinux-keyring
+reflector
 
 # Hardware
 pulseaudio
@@ -22,7 +28,6 @@ nano
 git
 calc
 bc
-scrot
 tree
 mlocate
 wget
@@ -35,6 +40,7 @@ unrar
 p7zip
 zip
 unizp
+zstd
 ffmpeg
 htop
 dos2unix
@@ -63,6 +69,7 @@ xpdf
 zeal
 openscad
 filezilla
+scrot
 
 # Terminals
 xterm
@@ -80,6 +87,7 @@ docker
 rtorrent
 mpc
 mpd
+android-tools (fastboot & adb)
 
 # Services
 dhcpcd
@@ -87,6 +95,7 @@ ntp
 openssh
 redis
 mariadb
+nginx
 
 xorg-server
 xorg-xrdb
@@ -147,6 +156,8 @@ intel-ucode
 xf86-video-intel
 vulkan-intel
 intel-compute-runtime
+intel-media-driver
+intel-hybrid-codec-driver
 # AMD
 amd-ucode
 amd-vlk
@@ -162,7 +173,7 @@ opencl-nvidia
 # Networking
 nmap
 ethtool
-bind (aka dnsutils)
+dnsutils
 traceroute
 gnu-netcat
 iputils
@@ -185,6 +196,7 @@ base-devel
 #	cmake
 #	m4
 #	bison
+upx
 
 stress
 tlp (tlp-stat)
@@ -193,6 +205,7 @@ lm_sensors
 dmidecode (mobo info)
 
 mdadm (raid)
+hdparm
 amp (rust text editor)
 tk (for matplotlib)
 xflux
@@ -209,3 +222,10 @@ ripgrep (grep alternative)
 bluez-utils
 pulseaudio-bluetooth
 pavucontrol
+
+vsftpd (ftp server)
+sshfs (filesystem mounting over ssh)
+nfs-utils
+cronie (cron jobs)
+samba
+tmux
