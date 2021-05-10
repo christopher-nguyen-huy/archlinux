@@ -127,6 +127,10 @@ albert
 
 # Taskbars
 tint2
+lemonbar
+polybar
+i3bar
+i3status
 
 # Fonts
 noto-fonts (no tofu)
