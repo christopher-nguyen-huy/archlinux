@@ -6,7 +6,7 @@
 mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
 
 # Download, clean and sort
-curl "https://www.archlinux.org/mirrorlist/?protocol=https&ip_version=4&country=US&country=CA" | sed -e 's/^#Server/Server/g' -e '/^#/d' | rankmirrors -n 6 - > mirrorlist
+curl "https://archlinux.org/mirrorlist/?protocol=https&ip_version=4&country=US&country=CA" | sed -e 's/^#Server/Server/g' -e '/^#/d' | rankmirrors -n 6 - > mirrorlist
 
 mv mirrorlist /etc/pacman.d/mirrorlist
 
